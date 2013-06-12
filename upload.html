@@ -1,18 +1,19 @@
 
 <html>
-<body>
-	<script src="jquery.js"> </script>
-	<script src="sbml.js"> </script>
-	<script src="simulation.js"> </script>
-	<script src="numeric.js"> </script> 
-	<script>
-	function runner()
-	{
-		var obj = document.getElementById('myfile')
-		var tester = new Sim("obj");
-		tester.simulate();
-	}
-	</script>
+	<body>
+		<script src="jquery.js"> </script>
+		<script src="sbml.js"> </script>
+		<script src="simulation.js"> </script>
+		<script src="numeric.js"> </script> 
+		<script>
+			function runner()
+			{
+				var obj = document.getElementById('myfile')
+				var tester = new Sim("obj");
+				
+				alert(tester.simulate());
+			}
+		</script>
 	<INPUT TYPE="button" NAME="simulate" VALUE="Click to process your order" onClick="runner()">
 	</body>
-	</html>
+</html>
