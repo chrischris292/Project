@@ -1,0 +1,16 @@
+<html>
+<body>
+					Your code:
+					<input type="file" name="code" />
+				
+				<input type="submit" value="Turn in your assignment" />
+			<script src="jquery.js"> </script>
+			<script src="sbml.js"></script>
+			<script src="simulation.js"> </script>
+			<script src="numeric.js"> </script>
+			<script>
+			var tester = new Sim("code");
+			</script>
+			<INPUT TYPE="button" NAME="processOrder" VALUE="Click to process your order" onClick="tester.simulate();">
+	</body>
+</html>
