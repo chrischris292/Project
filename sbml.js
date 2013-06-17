@@ -19,10 +19,10 @@ SbmlParser.prototype.updateParameter = function(id, value) {
 // updates parameters and propogates changes to other model properties
 SbmlParser.prototype.updateParameters = function(parameters) {
     for (var i = 0; i < this.$sbmlDoc.find('parameter').length; i++) { // from parameters
-        this.$sbmlDoc.find('parameter')[i].setAttribute('value', parameters[this.$sbmlDoc.find('parameter')[i].getAttribute('id')] );
+        this.$sbmlDoc.find('parameter')[i].setAttribute('value', parameters[this.$sbmlDoc.find('parameter')[i].getAttribute('name')] );
     }
     for (i = 0; i < this.$sbmlDoc.find('compartment').length; i++) { // from compartments
-        this.$sbmlDoc.find('compartment')[i].setAttribute('size', parameters[this.$sbmlDoc.find('compartment')[i].getAttribute('id')] );
+        this.$sbmlDoc.find('compartment')[i].setAttribute('size', parameters[this.$sbmlDoc.find('compartment')[i].getAttribute('name')] );
     }
     this.update();
 };
@@ -57,7 +57,7 @@ SbmlParser.prototype.getParameters = function() {
 SbmlParser.prototype.getListOfSpecies = function() {
     var listOfSpecies = [];
     for (var i = 0; i < this.$sbmlDoc.find('species').length; i++) {
-        listOfSpecies[i] = this.$sbmlDoc.find('species')[i].getAttribute('id');
+        listOfSpecies[i] = this.$sbmlDoc.find('species')[i].getAttribute('name');
     };
     return listOfSpecies;
 }
