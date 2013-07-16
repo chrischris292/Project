@@ -1,18 +1,26 @@
-
 <html>
-	<body>
+    <body>
 		<script src="jquery.js"> </script>
 		<script src="sbml.js"> </script>
 		<script src="simulation.js"> </script>
-		<script src="numeric.js"> </script> 
 		<script>
 			function runner()
 			{
-				var obj = document.getElementById('myfile')
-				var tester = new Sim("obj");
-				
-				alert(tester.simulate());
-			}
+				    if (typeof jQuery != "undefined")
+					 {
+		 				var obj =document.getElementById('myfile');
+		 			    sbmlDoc = $.parseXML(obj);
+		 				$sbmlDoc = $(sbmlDoc);
+		 				sbmlModel = new SbmlParser($sbmlDoc);
+		 				var tester = new Sim(sbmlModel);	
+		 				alert(tester.simulate());    
+				     } 
+					else 
+					{
+				        window.setTimeout(alert('Jquery not loaded'), 1000);
+				    }
+				};
+
 		</script>
 	<INPUT TYPE="button" NAME="simulate" VALUE="Click to process your order" onClick="runner()">
 	</body>

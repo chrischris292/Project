@@ -1,4 +1,3 @@
-// sbml.js: Parsing sbml documents
 
 function SbmlParser($sbmlDoc) {
     this.$sbmlDoc = $sbmlDoc;
@@ -17,12 +16,25 @@ SbmlParser.prototype.updateParameter = function(id, value) {
 };
 
 // updates parameters and propogates changes to other model properties
-SbmlParser.prototype.updateParameters = function(parameters) {
-    for (var i = 0; i < this.$sbmlDoc.find('parameter').length; i++) { // from parameters
+SbmlParser.prototype.updateParameters = function(parameters) 
+{
+    for (var i = 0; i < this.$sbmlDoc.find('parameter').length; i++) 
+	{ // from parameters
+		if(this.$sbmlDoc.find('parameter')[i].getAttribute('name')!=undefined)
+        this.$sbmlDoc.find('parameter')[i].setAttribute('value', parameters[this.$sbmlDoc.find('parameter')[i].getAttribute('name')] );
+		else if(this.$sbmlDoc.find('parameter')[i].getAttribute('id')!=undefined)
         this.$sbmlDoc.find('parameter')[i].setAttribute('value', parameters[this.$sbmlDoc.find('parameter')[i].getAttribute('id')] );
+		else
+		console.error('neither attributes name nor id  were found.')
     }
     for (i = 0; i < this.$sbmlDoc.find('compartment').length; i++) { // from compartments
+		if(this.$sbmlDoc.find('compartment')[i].getAttribute('name')!=undefined)
+        this.$sbmlDoc.find('compartment')[i].setAttribute('size', parameters[this.$sbmlDoc.find('compartment')[i].getAttribute('name')] );
+		else if(this.$sbmlDoc.find('compartment')[i].getAttribute('id')!=undefined)
         this.$sbmlDoc.find('compartment')[i].setAttribute('size', parameters[this.$sbmlDoc.find('compartment')[i].getAttribute('id')] );
+		else
+		console.error('neither attributes name nor id were found.')
+		
     }
     this.update();
 };
@@ -57,7 +69,7 @@ SbmlParser.prototype.getParameters = function() {
 SbmlParser.prototype.getListOfSpecies = function() {
     var listOfSpecies = [];
     for (var i = 0; i < this.$sbmlDoc.find('species').length; i++) {
-        listOfSpecies[i] = this.$sbmlDoc.find('species')[i].getAttribute('id');
+        listOfSpecies[i] = this.$sbmlDoc.find('species')[i].getAttribute('name');
     };
     return listOfSpecies;
 }
@@ -91,8 +103,7 @@ SbmlParser.prototype.getListOfReactionInfix = function() {
     var listOfReactionInfix = [];
     for (var i = 0; i < this.$sbmlDoc.find('reaction').length; i++) {
         var a = this.$sbmlDoc.find('reaction')[i].getElementsByTagName('ci');
-
-        var key = a[0].textContent.replace(/\s+/g, '');
+		var key = a[0].textContent.replace(/\s+/g, '');
         var token;
         if (parameters[key] !== undefined) {
             token = parameters[key];
