@@ -11,7 +11,7 @@ Sim.prototype.simulate = function($sbmlDoc) {
     var sbmlModel = new SbmlParser($sbmlDoc);
     var listOfSpecies = sbmlModel.listOfSpecies;
 
-    var species = state.$sbmlDoc.find('species');
+    var species = $sbmlDoc.find('species');
     // calculate stoichiometry matrix
     var stoichiometryMatrix = sbmlModel.stoichiometry;
     // finding infix
