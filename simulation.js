@@ -34,7 +34,6 @@ Sim.prototype.simulate = function($sbmlDoc) {
             }
         }
         return eval(odeString);
-
     };
 
     var initialConditions = [];
