@@ -26,7 +26,7 @@ SbmlParser.prototype.updateParameters = function(parameters)
         this.$sbmlDoc.find('parameter')[i].setAttribute('value', parameters[this.$sbmlDoc.find('parameter')[i].getAttribute('id')] );
 		else
 		console.error('neither attributes name nor id  were found.')
-    }
+    }1
     for (i = 0; i < this.$sbmlDoc.find('compartment').length; i++) { // from compartments
 		if(this.$sbmlDoc.find('compartment')[i].getAttribute('name')!=undefined)
         this.$sbmlDoc.find('compartment')[i].setAttribute('size', parameters[this.$sbmlDoc.find('compartment')[i].getAttribute('name')] );
