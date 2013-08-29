@@ -1,14 +1,15 @@
 <html>
     <body>
-		<script src="jquery.js"> </script>
-		<script src="sbml.js"> </script>
-		<script src="simulation.js"> </script>
+		<script src="javascript/jquery.js"> </script>
+		<script src="javascript/sbml.js"> </script>
+		<script src="javascript/simulation.js"> </script>
 		<script>
 			function runner()
 			{
 				    if (typeof jQuery != "undefined")
 					 {
 		 				var obj =document.getElementById('myfile');
+						console.log(obj);
 		 			    sbmlDoc = $.parseXML(obj);
 		 				$sbmlDoc = $(sbmlDoc);
 		 				sbmlModel = new SbmlParser($sbmlDoc);

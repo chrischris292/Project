@@ -1,12 +1,18 @@
 <html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="flat-ui.css">
-	</head>
-	<body>
-	Your SBML File
-	<form method="POST" enctype="multipart/form-data" action="upload.html">
-	<input type="file" name="myfile">
-	<input type="submit" name="submit" value="Upload Now">
-	</form>
-	</body>
+<head>
+	<script src = "Javascript/sbml.js"></script>
+	<script src = "Javascript/runner.js"></script>
+	<script src = "Javascript/simulation.js"></script>
+	<script src = "Javascript/jquery.js"></script>
+	<script src = "Javascript/numeric.js"></script>
+	
+</head>
+<body>
+	Paste XML File Here:
+<input type="text" id="text" name="file" style="width: 300px;" />
+<input type="submit" name="submit" value="Submit" onclick = "runner();">
+</form>
+
+
+</body>
 </html>

@@ -1,0 +1,112 @@
+<?php
+	// beer.php
+	// PHP/HTML code for Beer & Blog lecture example (Home page)
+	// Morgan Doocy
+	// 8 July 2013
+	
+	// Some practice stuff...
+	$version = 3;
+	$foo = "Morgan";
+	$stable = true;
+	// print "Hi, my name is $foo!";
+	
+	// // Visitor number. (Use 'visitor' parameter or default to a random number between 1 and 10,000.)
+	// if (isset($_GET['visitor'])) {
+	// 	$visitor_num = $_GET['visitor'];
+	// } else {
+	// 	$visitor_num = rand(1, 10000);
+	// }
+	
+	// Load visitor number from 'visitors.txt' file, increment it, and save new number.
+	$visitor_num = file_get_contents('visitors.txt') + 1;
+	file_put_contents('visitors.txt', $visitor_num);
+	
+	// Number of bottles. (Use 'bottles' parameter or default to 99.)
+	if (isset($_GET['bottles'])) {
+		$num_bottles = $_GET['bottles'];
+	} else {
+		$num_bottles = 99;
+	}
+	
+	// Favorite beer. (Use 'fave' parameter or default to 'Belgian Quadrupel.)
+	if (isset($_GET['fave'])) {
+		$fave = $_GET['fave'];
+	} else {
+		$fave = "Belgian Quadrupel";
+	}
+	
+	// Container type. (Use 'container' parameter or default to 'bottle'.)
+	if (isset($_GET['container'])) {
+		$container = $_GET['container'];
+	} else {
+		$container = "bottle";
+	}
+	
+	// Determine welcome message.
+	$welcome_message = "Welcome! You are the {$visitor_num}th visitor to this page. Our favorite beer is $fave!";
+	
+	// Load & output HTML page header and function files.
+	$pagename = 'Home';
+	include('functions.php');
+	include('header.php');
+?>
+	<h2>About Root Beer &amp; Blog</h2>
+
+	<p>New â€“ version <?= $version ?>!</p>
+	
+	<?php
+		if ($stable) {
+			?>
+			<p>This is a stable version.</p>
+			<?php
+		} else {
+			?>
+			<p>This page is unstable! Beware!</p>
+			<?php
+		}
+	?>
+	
+	<p><?= $welcome_message ?></p>
+	
+	<p>
+		Beer and Blog is a weekly meet up based on bloggers helping bloggers over beers. <a href=".">About Beer &amp; Blog</a>
+	</p>
+
+	<p>
+		<a href="http://99-bottles-of-beer.net/">99 Bottles of Beer in code</a>
+	</p>
+
+	<h2>News</h2>
+
+	<ul>
+		<li>Beer and Blog Portland appears on local NBC</li>
+		<li>Las Vegas Weekly covers the Vegas Chapter kick-off meetup</li>
+		<li>Beer and Blog on KGW</li>
+		<li>The Beer and Blog family expands to include two more people and two more chapters</li>
+		<li>Beer and Blog featured on Strange Love Live</li>
+		<li>Beer &amp; Blog expands, adds staff and makes Jobwire</li>
+		<li>Beer and Blog gets some WebWorkerDaily love</li>
+	</ul>
+
+	<h2>Chapters</h2>
+
+	<ul>
+		<?php
+		// Cities in which Beer and Blog has a chapter (from 'cities.txt').
+		$cities = file('cities.txt', FILE_IGNORE_NEW_LINES);
+		foreach ($cities as $line) {
+			list($city_name, $founding_date, $num_members) = explode(':', $line);
+			?>
+			<li>Beer and Blog <?= $city_name ?> (<?= $num_members ?> member<?= $num_members == 1 ? '' : 's' ?>)</li>
+			<?php
+		}
+		?>
+	</ul>
+
+	<h2>Our Club Song</h2>
+	
+	<?php for ($i = $num_bottles; $i >= 1; $i--) { ?>
+		<p><?= $i ?> <?= $container ?>s of beer on the wall, <?= $i ?> <?= $container ?>s of beer. Take one down and pass it around, <?= $i - 1 ?> <?= $container ?>s of beer on the wall.</p>
+	<?php } ?>
+	
+<?php include('footer.php'); ?>
